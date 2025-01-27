@@ -1,0 +1,81 @@
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120vh;
+    background-color: black;
+  }
+  
+  .signup-box {
+    background-color: #1a1a1a;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 1px 1px 4px 4px rgba(255, 1, 1, 0.9);
+    text-align: center;
+    width: 400%;
+    max-width: 400px;
+  }
+  
+  .signup-logo {
+    width: 100px;
+    margin-bottom: 1rem;
+  }
+  
+  .signup-title {
+    color: red;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .signup-input {
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #222;
+    color: white;
+  }
+  
+  .signup-input:focus {
+    outline: none;
+    border-color: red;
+  }
+  
+  .signup-button {
+    background-color: rgb(253, 4, 4);
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .signup-button:hover {
+    background-color: rgb(139, 0, 0);
+  } 
+  .signup-options {
+    margin-top: 1rem;
+  }
+  
+  .signup-options a {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: red;
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 768px) {
+    .signup-box {
+      width: 90%;
+      padding: 1.5rem;
+    }
+  }
