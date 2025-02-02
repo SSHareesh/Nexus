@@ -40,3 +40,54 @@
     color: #ffffff; 
     font-weight: bold;
   }
+
+  .quick-actions {
+    background: #000000;
+    padding: 15px;
+    border-radius: 10px;
+    width: 400px;
+    margin: 5px solid red;
+    border-color: #ff0000;
+    text-align: center;
+  }
+  
+  .action-btn {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px;
+    background: #ff0000;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .action-btn:hover {
+    background: #ab111189;
+    color: rgb(255, 255, 255);
+  }
+  .piechart-container {
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 10px;
+    width: 250px;
+    text-align: center;
+  }
+  
+  .chart-container {
+    max-width: 250px;
+    margin: auto;
+  }
+  
+  @media (max-width: 768px) {
+    .dashboard-page {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .quick-actions, .piechart-container {
+      width: 100%;
+    }
+  }

@@ -2,9 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/login/login';
 import Signup from './pages/signup/signup';
-import Sidebar from "./components/Sidebar/Sidebar";
 import Dashboard from "./pages/Dashboard/Dashboard";
-
+import HardwareAssets from './pages/HardwareAssets/Hardwareassets';
+import SoftwareAssets from './pages/SoftwareAssets/SoftwareAssets';
+import ManageEmployees from './pages/ManageEmployees/ManageEmployees';
+import Layout from './components/Layout/Layout';
 
 const App = () => {
   return (
@@ -14,8 +16,11 @@ const App = () => {
         <Route path="/Signup" element={<Signup />} />
 
 
-        <Route path="/Dashboard" element={<> <Sidebar /><Dashboard /></> } />
-        {/* <Route path="/Dashboard" element={<Dashboard />} /> */}    
+        <Route path="/Dashboard" element={<Layout> <Dashboard /> </Layout> } />
+        <Route path="/HardwareAssets" element={<Layout> <HardwareAssets /> </Layout>} />
+        <Route path="/SoftwareAssets" element={<Layout> <SoftwareAssets /> </Layout>} />
+        <Route path="/ManageEmployees" element={<Layout> <ManageEmployees /></Layout>} />
+        {/* <Route path="/HardwareAssets" element={<HardwareAssets />} />     */}
       </Routes> 
     </Router>
   );

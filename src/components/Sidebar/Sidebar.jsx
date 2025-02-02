@@ -11,10 +11,10 @@ const Sidebar = () => {
       <div className="sidebar-menu">
       <ul>
         <li><Link to="/Dashboard">Dashboard</Link></li>
-        <li><Link to="/hardware-assets">Hardware Assets</Link></li>
-        <li><Link to="/software-assets">Software Assets</Link></li>
+        <li><Link to="/HardwareAssets">Hardware Assets</Link></li>
+        <li><Link to="/SoftwareAssets">Software Assets</Link></li>
         <li><Link to="/maintenance">Maintenance</Link></li>
-        <li><Link to="/manage-employee">Manage Employee</Link></li>
+        <li><Link to="/ManageEmployees">Manage Employee</Link></li>
         <li><Link to="/audit-logs">Audit Logs</Link></li>
         <li><Link to="/reports">Reports</Link></li>
         <li><Link to="/notifications">Notifications</Link></li>
