@@ -16,16 +16,30 @@ const Dashboard = () => {
       });
     
       useEffect(() => {
-        
-        axios
-          .get("http://localhost:5000/api/dashboard-data") 
-          .then((response) => {
-            setData(response.data);
-          })
-          .catch((error) => {
-            console.error("Error fetching dashboard data:", error);
-          });
-       }, []);
+        const fetchData = () => {
+            axios.get("http://localhost:5000/api/assets/count")
+                .then((response) => {
+                    const totalAssets = Number(response.data.asset_count) + Number(response.data.software_count);
+                    setData({
+                        totalAssets,
+                        hardwareAssets: response.data.asset_count,
+                        disposed: response.data.disposal_count,
+                        softwareAssets: response.data.software_count,
+                        inUse: response.data.usage_count,
+                        maintenance: response.data.maintenance_count,
+                        expiringLicenses: response.data.expiry_count,
+                        inStock: response.data.stock_count
+                    });
+                })
+                .catch((error) => console.error("Error fetching dashboard data:", error));
+        };
+    
+        fetchData();  // Initial fetch
+        const interval = setInterval(fetchData, 5000);  // Refresh every 5 seconds
+    
+        return () => clearInterval(interval);  // Cleanup on unmount
+    }, []);
+    
 
   return (
     <div className="dashboard">
