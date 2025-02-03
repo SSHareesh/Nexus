@@ -116,7 +116,7 @@ const HardwareAssets = () => {
                   <td>{asset.location}</td>
                   <td>{asset.status}</td>
                   <td>
-                    <button className="edit-btn">✏️</button>
+                  <button className="edit-btn" onClick={() => navigate(`/edit-hardware/${asset.assetid}`)}>✏️</button>
                     <button className="history-btn">🔄</button>
                     <button className="delete-btn">🗑️</button>
                   </td>
