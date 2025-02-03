@@ -8,16 +8,48 @@ const HardwareAssets = () => {
   const [assets, setAssets] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("ALL");
+  
+  // Fix: Add states for dialog and asset deletion
+  const [isDialogOpen, setDialogOpen] = useState(false);
+  const [assetIdToDelete, setAssetIdToDelete] = useState(null);
 
-  // Fetch data from backend
   useEffect(() => {
     fetch("http://localhost:5000/api/assets")
       .then((res) => res.json())
-      .then((data) => setAssets(data)) // Assuming the API returns an array of assets
+      .then((data) => setAssets(data))
       .catch((err) => console.error("Error fetching assets:", err));
   }, []);
 
-  // Map filters to asset properties for sorting
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/assets/${assetIdToDelete}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to delete asset with ID: ${assetIdToDelete}`);
+      }
+
+      // Remove the deleted asset from the list
+      setAssets((prevAssets) => prevAssets.filter((asset) => asset.assetid !== assetIdToDelete));
+      setDialogOpen(false);
+      alert('Asset deleted successfully!');
+    } catch (error) {
+      console.error("Error deleting asset:", error);
+      alert(error.message);
+    }
+  };
+
+  const openDeleteDialog = (id) => {
+    setAssetIdToDelete(id);
+    setDialogOpen(true);
+  };
+
+  const closeDeleteDialog = () => {
+    setDialogOpen(false);
+    setAssetIdToDelete(null);
+  };
+
   const filterMapping = {
     ALL: null,
     ASSIGNED: "status",
@@ -29,14 +61,13 @@ const HardwareAssets = () => {
     RETAILER: "retailer"
   };
 
-  // Filter and sort assets
   const filteredAssets = assets
     .filter((asset) => {
       if (filter === "ASSIGNED") return asset.status?.toLowerCase() === "assigned";
       if (filter === "UNASSIGNED") return asset.status?.toLowerCase() === "unassigned";
       if (filter === "HISTORY") return asset.status?.toLowerCase() === "history";
       if (filter === "DISPOSED") return asset.status?.toLowerCase() === "disposed";
-      return true; // For ALL or other filters
+      return true;
     })
     .sort((a, b) => {
       const key = filterMapping[filter];
@@ -46,11 +77,12 @@ const HardwareAssets = () => {
       return 0;
     })
     .filter((asset) => {
-      // Apply search term filter
       return (
         asset.assetid?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         asset.make?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        asset.productid?.toLowerCase().includes(searchTerm.toLowerCase())
+        asset.retailer?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        asset.status?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        asset.assigneduser?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     });
 
@@ -59,7 +91,6 @@ const HardwareAssets = () => {
       <Sidebar />
 
       <div className="hardware-assets-content">
-        {/* Top Bar */}
         <div className="top-bar">
           <input
             type="text"
@@ -68,14 +99,12 @@ const HardwareAssets = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-bar"
           />
-
           <h3>HARDWARE ASSETS</h3>
           <button className="add-asset-btn" onClick={() => navigate("/add-asset")}>
             ➕ Add New
           </button>
         </div>
 
-        {/* Filter Buttons */}
         <div className="filter-container">
           <div className="filter-buttons">
             {["ALL", "ASSIGNED", "UNASSIGNED", "HISTORY", "DISPOSED", "LOCATION", "RETAILER"].map((category) => (
@@ -90,7 +119,6 @@ const HardwareAssets = () => {
           </div>
         </div>
 
-        {/* Asset Table */}
         <div className="table-container">
           <table>
             <thead>
@@ -116,9 +144,14 @@ const HardwareAssets = () => {
                   <td>{asset.location}</td>
                   <td>{asset.status}</td>
                   <td>
+<<<<<<< HEAD
                   <button className="edit-btn" onClick={() => navigate(`/edit-hardware/${asset.assetid}`)}>✏️</button>
+=======
+                    <button className="view-more">▶️</button>
+                    <button className="edit-btn">✏️</button>
+>>>>>>> eb12feb32406b561d0b112f0db0d42e62729fb8d
                     <button className="history-btn">🔄</button>
-                    <button className="delete-btn">🗑️</button>
+                    <button className="delete-btn" onClick={() => openDeleteDialog(asset.assetid)}>🗑️</button>
                   </td>
                 </tr>
               ))}
@@ -126,6 +159,17 @@ const HardwareAssets = () => {
           </table>
         </div>
       </div>
+
+      {isDialogOpen && (
+        <div className="confirmation-dialog">
+          <div className="dialog-content">
+            <h3>Are you sure you want to dispose of this asset?</h3>
+            <p>Asset ID: {assetIdToDelete}</p>
+            <button className="y1" onClick={handleDelete}>Yes</button>
+            <button className="y1" onClick={closeDeleteDialog}>No</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
