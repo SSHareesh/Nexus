@@ -119,6 +119,7 @@ const SoftwareAssets = () => {
                   <td>{asset.assigneduserid || "N/A"}</td>
                   <td>{asset.project || "N/A"}</td>
                   <td>
+                  <button className="view-more">▶️</button>
                     <button className="edit-btn">✏️</button>
                     <button className="history-btn">🔄</button>
                     <button className="delete-btn">🗑️</button>

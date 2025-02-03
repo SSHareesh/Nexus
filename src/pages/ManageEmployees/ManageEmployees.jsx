@@ -60,22 +60,25 @@ const ManageEmployees = () => {
           <table>
             <thead>
               <tr>
-                <th>Asset Name</th>
-                <th>License Type</th>
-                <th>Purchase Date</th>    
-                <th>Assigned Project</th>
-                <th>Expiry Date</th>
+                <th>User ID</th>
+                <th>User name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Status</th>    
+                <th>Employee type</th>
+                <th>Project</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {filteredEmployee.map((employee) => (
                 <tr key={asset.id}>
+                  <td>{employee.userid}</td>
                   <td>{employee.name}</td>
-                  <td>{employee.status}</td>
+                  <td>{employee.email}</td>
+                  <td>{employee.phone}</td>
+                  <td>{employee.employee_type}</td>
                   <td>{employee.project}</td>
-                  <td>{employee.assetCount}</td>
-                  <td>{ employee.requestsCount}</td>
                   <td>
                     <button className="edit-btn">✏️</button>
                     <button className="history-btn">🔄</button>

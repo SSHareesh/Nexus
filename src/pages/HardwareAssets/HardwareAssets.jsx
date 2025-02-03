@@ -144,6 +144,7 @@ const HardwareAssets = () => {
                   <td>{asset.location}</td>
                   <td>{asset.status}</td>
                   <td>
+                    <button className="view-more">▶️</button>
                     <button className="edit-btn">✏️</button>
                     <button className="history-btn">🔄</button>
                     <button className="delete-btn" onClick={() => openDeleteDialog(asset.assetid)}>🗑️</button>
