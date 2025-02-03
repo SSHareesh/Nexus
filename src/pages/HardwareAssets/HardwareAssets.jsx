@@ -143,12 +143,8 @@ const HardwareAssets = () => {
                   <td>{asset.location}</td>
                   <td>{asset.status}</td>
                   <td>
-<<<<<<< HEAD
                   <button className="edit-btn" onClick={() => navigate(`/edit-hardware/${asset.assetid}`)}>✏️</button>
-=======
-                    <button className="view-more">▶️</button>
-                    <button className="edit-btn">✏️</button>
->>>>>>> eb12feb32406b561d0b112f0db0d42e62729fb8d
+                    <button className="view-more" onClick={() => navigate(`/edit-hardware/${asset.assetid}`)}>▶️</button>
                     <button className="history-btn">🔄</button>
                     <button className="delete-btn" onClick={() => openDeleteDialog(asset.assetid)}>🗑️</button>
                   </td>
