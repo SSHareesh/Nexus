@@ -54,7 +54,7 @@ const HardwareAssets = () => {
     ALL: null,
     ASSIGNED: "status",
     UNASSIGNED: "status",
-    HISTORY: "status",
+    TYPE: "assettype",
     DISPOSED: "status",
     LOCATION: "location",
     PROJECT: "project",
@@ -62,29 +62,28 @@ const HardwareAssets = () => {
   };
 
   const filteredAssets = assets
-    .filter((asset) => {
-      if (filter === "ASSIGNED") return asset.status?.toLowerCase() === "assigned";
-      if (filter === "UNASSIGNED") return asset.status?.toLowerCase() === "unassigned";
-      if (filter === "HISTORY") return asset.status?.toLowerCase() === "history";
-      if (filter === "DISPOSED") return asset.status?.toLowerCase() === "disposed";
-      return true;
-    })
-    .sort((a, b) => {
-      const key = filterMapping[filter];
-      if (key && a[key] && b[key]) {
-        return a[key].toString().localeCompare(b[key].toString());
-      }
-      return 0;
-    })
-    .filter((asset) => {
-      return (
-        asset.assetid?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        asset.make?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        asset.retailer?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        asset.status?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        asset.assigneduser?.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    });
+  .filter((asset) => {
+    if (filter === "ASSIGNED") return asset.status?.toLowerCase() === "assigned";
+    if (filter === "UNASSIGNED") return asset.status?.toLowerCase() === "unassigned";
+    if (filter === "DISPOSED") return asset.status?.toLowerCase() === "disposed";
+    return true; // For ALL, TYPE, LOCATION, RETAILER, etc.
+  })
+  .sort((a, b) => {
+    const key = filterMapping[filter];
+    if (key && a[key] && b[key]) {
+      return a[key].toString().localeCompare(b[key].toString());
+    }
+    return 0; // No sorting if key is null (like for ALL)
+  })
+  .filter((asset) => {
+    return (
+      asset.assetid?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      asset.make?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      asset.retailer?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      asset.status?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      asset.assigneduser?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
 
   return (
     <div className="hardware-assets-container">
@@ -107,7 +106,7 @@ const HardwareAssets = () => {
 
         <div className="filter-container">
           <div className="filter-buttons">
-            {["ALL", "ASSIGNED", "UNASSIGNED", "HISTORY", "DISPOSED", "LOCATION", "RETAILER"].map((category) => (
+            {["ALL", "ASSIGNED", "UNASSIGNED", "TYPE", "DISPOSED", "LOCATION", "RETAILER"].map((category) => (
               <button
                 key={category}
                 className={filter === category ? "active" : ""}
