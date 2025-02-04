@@ -81,7 +81,7 @@ const HardwareAssets = () => {
       asset.make?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       asset.retailer?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       asset.status?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      asset.assigneduser?.toLowerCase().includes(searchTerm.toLowerCase())
+      asset.assigneduserid?.toLowerCase().includes(searchTerm.toLowerCase())
     );
   });
 
@@ -99,7 +99,7 @@ const HardwareAssets = () => {
             className="search-bar"
           />
           <h3>HARDWARE ASSETS</h3>
-          <button className="add-asset-btn" onClick={() => navigate("/add-asset")}>
+          <button className="add-asset-btn" onClick={() => navigate("/AddHardwareAsset")}>
             ➕ Add New
           </button>
         </div>
@@ -126,7 +126,7 @@ const HardwareAssets = () => {
                 <th>Asset Type</th>
                 <th>Make</th>
                 <th>Retailer</th>
-                <th>Assigned User</th>
+                <th>Assigned User ID</th>
                 <th>Location</th>
                 <th>Status</th>
                 <th>Actions</th>
@@ -139,13 +139,13 @@ const HardwareAssets = () => {
                   <td>{asset.assettype}</td>
                   <td>{asset.make}</td>
                   <td>{asset.retailer}</td>
-                  <td>{asset.assigneduser}</td>
+                  <td>{asset.assigneduserid}</td>
                   <td>{asset.location}</td>
                   <td>{asset.status}</td>
                   <td>
                   <button className="edit-btn" onClick={() => navigate(`/edit-hardware/${asset.assetid}`)}>✏️</button>
                     <button className="view-more" onClick={() => navigate(`/edit-hardware/${asset.assetid}`)}>▶️</button>
-                    <button className="history-btn">🔄</button>
+                    <button className="history-btn" >🔄</button>
                     <button className="delete-btn" onClick={() => openDeleteDialog(asset.assetid)}>🗑️</button>
                   </td>
                 </tr>

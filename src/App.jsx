@@ -7,7 +7,8 @@ import HardwareAssets from './pages/HardwareAssets/HardwareAssets';
 import SoftwareAssets from './pages/SoftwareAssets/SoftwareAssets';
 import ManageEmployees from './pages/ManageEmployees/ManageEmployees';
 import Layout from './components/Layout/Layout';
-import EditHardwareAsset from "./pages/EditHardwareAsset.js/EditHarrdwareAsset.jsx";
+import EditHardwareAsset from "./pages/EditHardwareAsset.js/EditHardwareAsset";
+import AddHardwareAsset from './pages/AddHardwareAsset.js/AddHardwareAsset';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/SoftwareAssets" element={<Layout> <SoftwareAssets /> </Layout>} />
         <Route path="/ManageEmployees" element={<Layout> <ManageEmployees /></Layout>} />
         <Route path="/edit-hardware/:id" element={<EditHardwareAsset />} />
+        <Route path="/AddHardwareAsset" element={<AddHardwareAsset/>} />
         {/* <Route path="/HardwareAssets" element={<HardwareAssets />} />     */}
       </Routes> 
     </Router>

@@ -18,7 +18,6 @@ const SoftwareAssets = () => {
       })
       .catch((err) => console.error("Error fetching assets:", err));
   }, []);
-
   // Function to handle sorting when a filter button is clicked
   const handleSort = (key) => {
     let direction = "asc";
@@ -122,7 +121,7 @@ const SoftwareAssets = () => {
                   <button className="view-more">▶️</button>
                     <button className="edit-btn">✏️</button>
                     <button className="history-btn">🔄</button>
-                    <button className="delete-btn">🗑️</button>
+                    <button className="delete-btn" onClick={() => openDeleteDialog(asset.softwareid)}>🗑️</button> 
                   </td>
                 </tr>
               ))}
