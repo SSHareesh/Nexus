@@ -9,6 +9,7 @@ import ManageEmployees from './pages/ManageEmployees/ManageEmployees';
 import Layout from './components/Layout/Layout';
 import EditHardwareAsset from "./pages/EditHardwareAsset.js/EditHardwareAsset";
 import AddHardwareAsset from './pages/AddHardwareAsset.js/AddHardwareAsset';
+import AddSoftwareAssets from './pages/AddSoftwareAssets/AddSoftwareAssets';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/ManageEmployees" element={<Layout> <ManageEmployees /></Layout>} />
         <Route path="/edit-hardware/:id" element={<EditHardwareAsset />} />
         <Route path="/AddHardwareAsset" element={<AddHardwareAsset/>} />
+        <Route path="/AddSoftwareAssets" element={<AddSoftwareAssets/>} /> 
         {/* <Route path="/HardwareAssets" element={<HardwareAssets />} />     */}
       </Routes> 
     </Router>

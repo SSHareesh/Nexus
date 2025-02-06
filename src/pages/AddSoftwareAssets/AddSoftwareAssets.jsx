@@ -1,35 +1,33 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import "./AddHardwareAsset.css";
+import "./AddSoftwareAssets.css";
 
-const AddHardwareAsset = () => {
+const AddSoftwareAssets = () => {
   const navigate = useNavigate();
   const [asset, setAsset] = useState({
-    assetid: "",
-    assettype: "",
-    make: "",
-    productid: "",
-    purchasedate: "",
-    retailer: "",
-    warrantyexpiry: "",
-    assigneduserid: "",
-    location: "",
-    status: "",
-    lastcheckoutdate: "",
-    size: "",
-    operatingsystem: "",
-    typeofos: "",
-    productkey: "",
-    processor: "",
-    ram: "",
-    harddisktype: "",
-    harddisksize: "",
-    harddiskmodel: "",
-    resolution: "",
-    graphicscardmodel: "",
-    externaldongledetails: "",
-    check_in: ""
+        softwareid: "",
+        softwarename: "",
+        softwareversion: "",
+        purchasedate: "",
+        assetid: "",
+        licensetype: "",
+        licenseexpirydate: "",
+        assigneduserid: "",
+        project: "",
+        userstatus: "",
+        vendor: "",
+        licensepurchasedate: "",
+        licensekey: "",
+        serialnumber: "",
+        licenseduration: "",
+        licensecost: "",
+        username: "",
+        password: "",
+        expiredstatus: "",
+        renewaldate: "",
+        renewalcost: "",
+        comments: "",
   });
 
   const handleChange = (e) => {
@@ -41,23 +39,27 @@ const AddHardwareAsset = () => {
     console.log("Submitting asset with data:", asset);  // Log the asset data
 
     // Check if assetid is provided
-    if (!asset.assetid) {
-      alert("Asset ID is required!");
+    if (!asset.softwareid) {
+      alert("Software ID is required!");
       return;
     }
 
+    const sanitizedAsset = Object.fromEntries(
+        Object.entries(asset).map(([key, value]) => [key, value === "" ? null : value])
+    );
+
     try {
-      const response = await fetch("http://localhost:5000/api/assets", {
+      const response = await fetch("http://localhost:5000/api/software", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(asset),
+        body: JSON.stringify(sanitizedAsset),
       });
 
       const result = await response.json();
 
       if (response.ok) {
         alert("Asset added successfully!");
-        navigate("/HardwareAssets");
+        navigate("/SoftwareAssets");
       } else {
         alert(`Failed to add asset: ${result.message}`);
       }
@@ -69,8 +71,8 @@ const AddHardwareAsset = () => {
 
   return (
     <div className="edit-hardware-container">
-      <FaArrowLeft className="back-icon" onClick={() => navigate("/HardwareAssets")} />
-      <h2>Add New Hardware Asset</h2>
+      <FaArrowLeft className="back-icon" onClick={() => navigate("/SoftwareAssets")} />
+      <h2>Add New Software Asset</h2>
       <form onSubmit={handleSubmit} className="edit-form">
         {Object.entries(asset).map(([key, value]) => (
           <div key={key} className="form-group">
@@ -80,7 +82,7 @@ const AddHardwareAsset = () => {
               name={key}
               value={value}
               onChange={handleChange}
-              required={key === "assetid"} // Make Asset ID mandatory
+              required={key === "softwareid"} // Make Asset ID mandatory
             />
           </div>
         ))}
@@ -93,4 +95,5 @@ const AddHardwareAsset = () => {
   );
 };
 
-export default AddHardwareAsset;
+export default AddSoftwareAssets;
+ 
